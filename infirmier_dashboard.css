@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #77b5fe 3px solid;
+    position: fixed; /* Ajout pour fixer l'en-tête en haut */
+    width: 100%; /* Assure que l'en-tête occupe toute la largeur */
+    z-index: 1000; /* Assure que l'en-tête est au-dessus de tout */
+}
+
+header h1 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+nav {
+    float: left;
+    width: 20%;
+    background: #333;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100vh;
+    position: fixed; /* Fixe la navigation sur le côté */
+    top: 0; /* Aligne la navigation en haut */
+    left: 0; /* Aligne la navigation à gauche */
+    overflow-y: auto; /* Ajoute un défilement si nécessaire */
+}
+
+nav a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    margin: 10px 0;
+    padding: 10px;
+    background: #444;
+    text-align: center;
+}
+
+nav a:hover {
+    background: #575757;
+}
+
+main {
+    margin-left: 20%;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 70px; /* Ajoute un espace en haut pour l'en-tête fixe */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+/* Style pour aligner verticalement les champs des formulaires */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Style pour les champs de saisie */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.2s;
+}
+
+/* Style pour les étiquettes des champs */
+.form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Style pour les boutons */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Style pour les messages d'erreur */
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+
+/* Style pour les messages de succès */
+.success-message {
+    color: green;
+    font-size: 14px;
+}
