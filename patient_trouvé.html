@@ -1,0 +1,164 @@
+{% extends 'base_medecin.html' %}
+
+{% block title %}Tableau de Bord Médecin{% endblock %}
+
+{% block header %} identification du patient  {% endblock %}
+
+{% block content %}
+
+{% if patient %}
+
+    <h1>Informations personnelles</h1><br>
+    <p>Nom: {{ patient.nom }}</p>
+    <p>Prénom: {{ patient.prenom }}</p>
+    <p>Date de naissance: {{ patient.date_naissance }}</p>
+    <p>sexe: {{ patient.genre }}</p>
+    <p>adresse: {{ patient.adresse }}</p>
+    <p>telephone: {{ patient.telephone }}</p><br>
+    
+
+    <h2 class="carnet"> carnet</h2><p>date de creation: {{ patient.carnet.date_creation }}</p>
+    <table>
+        
+        <tr>
+            <td>masse</td>
+            <td>{{ patient.carnet.masse }} kg</td>
+        </tr>
+        <tr>
+            <td>temperature</td>
+            <td>{{ patient.carnet.temperature }} °C</td>
+        </tr>
+        <tr>
+            <td>pouls</td>
+            <td>{{ patient.carnet.pouls }} bpm</td>
+        </tr>
+        <tr>
+            <td>tension arterielle</td>
+            <td>{{ patient.carnet.tension_arterielle }} mmHg</td>
+        </tr>
+        <tr>
+            <td>groupe sanguin</td>
+            <td>{{ patient.carnet.groupe_sanguin }}</td>
+        </tr>
+        <tr>
+            <td>antecedant medicaux</td>
+            <td>{{ patient.carnet.antecedant_medicaux }}</td>
+        </tr>
+        <tr>
+            <td>allergies et intolerances</td>
+            <td>{{ patient.carnet.allergies_et_intolerances }}</td>
+        </tr>
+        <tr>
+            <td>Fumeur</td>
+            <td>{{ patient.get_fumeur_display }}</td>
+        </tr>
+        <tr>
+            <td>Boit Alcool</td>
+            <td>{{ patient.get_boit_alcool_display }}</td>
+        </tr>
+       
+    </table><br>
+
+    <h2 class="diagno">Anciens diagnostics et traitements</h2>
+    <table class="consul" border="1">
+        <thead>
+          <tr>
+            <th>Date de Consultation</th>
+            <th>Maladie</th>
+            <th>medicaments</th>
+            <th>durée du traitement</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for consultation in patient.consultation_set.all %}
+          <tr>
+            <td>{{ consultation.date_consultation }}</td>
+            <td>
+             {% for diagnostic in consultation.diagnostic_set.all %}
+                {{ diagnostic.maladie }}
+                {% endfor %}
+              </td>
+            <td>
+             {% for diagnostic in consultation.diagnostic_set.all %}
+             {% for traitement in diagnostic.traitement_set.all %}
+             {{ traitement.medicament }}
+                  {% endfor %}
+                  {% endfor %}
+            </td>
+            <td>
+                {% for diagnostic in consultation.diagnostic_set.all %}
+                {% for traitement in diagnostic.traitement_set.all %}
+             du  {{traitement.date_fin}}  au  {{traitement.date_debut}} 
+                {% endfor %}
+                {% endfor %}
+
+                
+              </td>
+            
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="3">Aucune consultation trouvée.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+
+    
+     <a class="lien" href=" {% url 'nouveau_diagnostic' patient.id %}"> nouveau diagnostic et traitement</a>
+    </form>
+
+
+    <!-- Ajoutez d'autres champs si nécessaire -->
+   {% elif not patient and code_patient %}
+  <p>Aucun patient trouvé avec ce code.</p>
+{% endif %}
+
+
+
+
+<style>
+    
+        .consul {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .consul, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #333;
+            color: white;
+        }</style>
+    
+
+<script>
+    function addForm(formsetPrefix, containerId) {
+        const container = document.getElementById(containerId);
+        const totalForms = document.getElementById('id_' + formsetPrefix + '-TOTAL_FORMS');
+        const formNum = totalForms.value;
+        const newForm = container.children[0].cloneNode(true);
+        const formRegex = RegExp(formsetPrefix + '-\\d+', 'g');
+        newForm.innerHTML = newForm.innerHTML.replace(formRegex, formsetPrefix + '-' + formNum);
+        container.appendChild(newForm);
+        totalForms.value = parseInt(formNum) + 1;
+    }
+
+    function addDiagnosticForm() {
+        addForm('diagnostic', 'diagnostic-forms');
+    }
+
+    function addTraitementForm() {
+        addForm('traitement', 'traitement-forms');
+    }
+</script>
+{% endblock %}

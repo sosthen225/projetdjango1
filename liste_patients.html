@@ -1,0 +1,44 @@
+
+{% extends 'base_infirmier.html' %}
+
+{% block title %}Liste des Patients{% endblock %}
+
+{% block content %}
+    <h2>Liste des Patients</h2>
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>code</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de Naissance</th>
+                <th>telephone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.code_patient |upper}}</td>
+                    <td>{{ patient.nom |upper}}</td>
+                    <td>{{ patient.prenom|lower }}</td>
+                    <td>{{ patient.date_naissance }}</td>
+                    <td>{{ patient.telephone }}</td>
+                    <td>
+                        <a href="{% url 'voir_carnet' patient.id %}">Voir Carnet</a> | 
+                        <a href="{% url 'modifier_carnet' patient.id %}">Modifier Carnet</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

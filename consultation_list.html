@@ -1,0 +1,54 @@
+{% extends 'base_medecin.html' %}
+
+{% block title %}Tableau de Bord Médecin{% endblock %}
+
+{% block header %}Liste des patients consultés par Dr.{{ medecin.nom |upper }}  {% endblock %}
+
+{% block content %}
+    <h2></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Date de consultation</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+            <tr>
+            <td>{{ patient.nom }} {{ patient.prenom }}</td>
+             {% for consultation in patient.consultation_set.all %}
+           <td>{{ consultation.date_consultation }}</td>
+            {% endfor %}    
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #333;
+            color: white;
+        }</style>
+    
+{% endblock %}

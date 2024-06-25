@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Tableau de Bord Infirmier{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/infirmier_dashboard.css' %}">
+    <script src= "{% static 'js/jquery-1.11.3.min.js' %}" ></script>
+    <script src= "{% static 'js/jquery-3.7.1.min.js' %}" ></script>
+</head>
+<body>
+    <div class = container>
+    <header>
+        <h1>{% block header %}Bienvenue{% endblock %}</h1>
+    </header>
+    <nav>
+        <a href="{% url 'infirmier_dashboard' %}">Tableau de Bord</a><br>
+        <a href="{% url 'nouveau_patient' %}">Nouveau Patient</a><br>
+        <a href="{% url 'nouveau_carnet' %}">Nouveau Carnet</a><br>
+        <a href="{% url 'liste_patients' %}">Liste des Patients</a><br><br><br><br><br><br><br><br><br>
+        <a href="{% url 'logout' %}">Se Déconnecter</a>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main></div>
+</body>
+</html>

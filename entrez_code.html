@@ -1,0 +1,28 @@
+{% extends 'base_medecin.html' %}
+
+{% block title %}Tableau de Bord Médecin{% endblock %}
+
+{% block header %} identification du patient  {% endblock %}
+
+{% block content %}
+
+<h1>Rechercher le Patient</h1>
+<form method="get" action="{% url 'rechercher_patient' %}">
+    <label for="code_patient">Code Patient:</label>
+    <input type="text" id="code_patient" name="code_patient" required>
+    <button type="submit">valider</button>
+</form>
+
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% endif %}
+<script>
+    // Fonction pour masquer le message de succès après 5 secondes
+    setTimeout(function() {
+        var successMessage = document.getElementById('success-message');
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+    }, 5000);
+</script>
+{% endblock %}

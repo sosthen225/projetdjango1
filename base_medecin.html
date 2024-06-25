@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Tableau de Bord Médecin{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/medecin_dashboard.css' %}">
+    <script src="{% static 'js/diagno.js' %}" ></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{% block header %}GESTIONNAIRE DE CARNET{% endblock %}</h1>
+        </header>
+        <nav>
+            <br><br><br><br><br> <a href="{% url 'medecin_dashboard' %}">Tableau de Bord</a><br>
+            <a href= "{% url 'rechercher_patient'%}">faire une consultation</a><br>
+            <a href=" {% url 'liste_consultation' %}"> liste de mes consultations</a><br><br><br><br><br><br><br><br><br><br>
+            <a href="{% url 'logout' %}">Se Déconnecter</a>
+        </nav>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'base_infirmier.html' %}
+
+{% block title %}Voir Carnet{% endblock %}
+
+{% block content %}
+    <h2> Carnet de  {{ patient.nom }} {{ patient.prenom }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>date</th>
+                <th>masse</th>
+                <th>temperature</th>
+                <th>pouls</th>
+                <th>tension arterielle</th>
+                <th>antecedents medicaux</th>
+                <th>allergies et intolerance</th>
+                <th>groupe sanguin</th>
+                <th>fumeur</th>
+                <th>boit l'alcool</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ carnet.date_creation}}</td>
+                    <td>{{ carnet.masse|upper}}kg</td>
+                    <td>{{ carnet.temperature |upper }} °C</td>
+                    <td>{{ carnet.pouls |upper }} bpm</td>
+                    <td>{{ carnet.tension_arterielle |upper }} mmHg</td>
+                    <td>{{ carnet.antecedents_medicaux|upper }}</td>
+                    <td>{{ carnet.allergies_et_intolerance|upper }}</td>
+                    <td>{{ carnet.groupe_sanguin|upper }}</td>
+                    <td>{{ carnet.fumeur|upper }}</td>
+                    <td>{{ carnet.alcool|upper }}</td>
+                </tr>
+        </tbody>
+    </table>
+{% endblock %}

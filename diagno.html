@@ -1,0 +1,20 @@
+{% extends 'base_medecin.html' %}
+{% block content %}
+<h2>Informations du Patient</h2>
+<p><strong>Nom :</strong> {{ patient.nom }}</p>
+<p><strong>Prénom :</strong> {{ patient.prenom }}</p>
+<p><strong>Date de Naissance :</strong> {{ patient.date_naissance }}</p>
+<p><strong>Genre :</strong> {{ patient.get_genre_display }}</p>
+<p><strong>Adresse :</strong> {{ patient.adresse }}</p>
+<p><strong>Téléphone :</strong> {{ patient.telephone }}</p>
+
+<h3>Consultation</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ consultation_form.as_p }}
+    {{ diagnostic_form.as_p }}
+    {{ traitement_form.as_p }}
+    <a  href=" {% url 'nouveau_diagnostic' patient.id %}"></a><button type="button" >Ajoutez un traitement</button></a>
+    <button type="submit">Enregistrer</button>
+</form>
+{% endblock %}
